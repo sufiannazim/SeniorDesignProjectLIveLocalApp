@@ -1,0 +1,55 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sufian.livelocal.HomeFragment">
+
+    <ViewFlipper
+        android:id="@+id/viewflipper"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:autoStart="true"
+        android:flipInterval="2000"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:scrollIndicators="left|right">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ct10cow"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="fitStart"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ct10tee"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="fitStart"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ct10squash"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="fitStart" />
+
+    </ViewFlipper>
+
+    <TextView
+        android:layout_width="374dp"
+        android:layout_height="160dp"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal|bottom"
+        android:textSize="30sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold|italic" />
+
+
+</FrameLayout>

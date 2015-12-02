@@ -1,0 +1,66 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f2f9f2"
+    tools:context="com.example.sufian.livelocal.HomeFragment">
+
+    <ViewFlipper
+        android:id="@+id/viewflipper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoStart="true"
+        android:flipInterval="2000"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:scrollIndicators="left|right">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ct10cow"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="fitStart"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ct10tee"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="fitStart"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ct10squash"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="fitStart" />
+
+    </ViewFlipper>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginTop="20px"
+        android:layout_marginBottom="25px"
+        android:layout_marginLeft="40px"
+        android:layout_marginRight="40px"
+        android:textSize="@dimen/StatstextSize"
+        android:paddingLeft="20dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal|bottom"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold|italic"
+        android:background="@drawable/black"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+
+
+</FrameLayout>

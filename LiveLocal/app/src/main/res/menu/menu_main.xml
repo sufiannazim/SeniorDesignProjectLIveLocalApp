@@ -1,0 +1,48 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+
+    <group
+        android:id="@+id/menu_admin"
+        android:checkableBehavior="single">
+
+    <item android:title="Home"
+        android:id="@+id/nav_item_home"
+        android:icon="@drawable/home"/>
+
+    <item android:title="About"
+        android:id="@+id/nav_item_about"
+        android:icon="@drawable/about"/>
+
+    <item android:title="PrivacyPolicy"
+        android:id="@+id/nav_item_privacyPolicy"
+        android:icon="@drawable/privpol"/>
+
+    <item android:title="Acknowledgements"
+        android:id="@+id/nav_item_acknowledgements"
+        android:icon="@drawable/acknowledgements"
+        />
+
+    </group>
+
+    <group
+        android:id="@+id/menu_guide"
+        android:checkableBehavior="single">
+
+        <item android:title="Grown Gift Guide"
+            android:id="@+id/nav_item_giftGuide"
+            android:icon="@drawable/about" />
+
+        <item android:title="Thanksgiving Turkey Guide"
+            android:id="@+id/nav_item_turkeyGuide"
+            android:icon="@drawable/about" />
+
+        <item android:title="Grown Valentine Guide"
+            android:id="@+id/nav_item_valentineGuide"
+            android:icon="@drawable/about" />
+
+    </group>
+
+
+
+</menu>

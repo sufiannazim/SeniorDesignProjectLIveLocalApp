@@ -78,6 +78,11 @@ public class MainActivity extends AppCompatActivity{
                     xfragmentTransaction.replace(R.id.containerView,new ValentinesGuideFragment()).commit();
                 }
 
+                if (menuItem.getItemId() == R.id.nav_item_contact) {
+                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.containerView,new ContactFragment()).commit();
+                }
+
                 return false;
             }
 

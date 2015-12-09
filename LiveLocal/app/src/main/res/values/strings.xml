@@ -37,4 +37,5 @@
     <string name="facebook_app_id">926592274061085</string>
     <string name="share">Share</string>
     <string name="title_activity_seasons_top10">SeasonsTop10</string>
+    <string name="title_activity_trails">TrailsActivity</string>
 </resources>

@@ -38,11 +38,28 @@ public class DiscoverFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = menu.get(position);
                 
-                if( item.equals("Events") ){
+                /*if( item.equals("Events") ){
                     Intent intent = new Intent(getActivity(), EventActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getActivity(), item, Toast.LENGTH_SHORT).show();
+                }*/
+                Intent intent;
+                switch (item){
+                    case "Events":
+                        intent = new Intent(getActivity(), EventActivity.class);
+                        startActivity(intent);
+                        break;
+                    case "Season's Top 10":
+                        intent = new Intent(getActivity(), SeasonsTop10.class);
+                        startActivity(intent);
+                        break;
+                    case "Trails":
+                        Toast.makeText(getActivity(), item, Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                        break;
                 }
             }
         });

@@ -14,8 +14,12 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+<<<<<<< HEAD
         android:id="@+id/discoverListView"
         />
+=======
+        android:id="@+id/discoverListView" />
+>>>>>>> origin/master
 
     </RelativeLayout>
 

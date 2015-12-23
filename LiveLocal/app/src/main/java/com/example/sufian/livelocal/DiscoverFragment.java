@@ -1,6 +1,7 @@
 package com.example.sufian.livelocal;
 
 import android.content.Intent;
+<<<<<<< HEAD
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
+=======
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+>>>>>>> origin/master
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +23,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.TextView;
 
+<<<<<<< HEAD
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +36,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+=======
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> origin/master
 
 public class DiscoverFragment extends Fragment {
     private List<String> menu;
@@ -53,6 +64,7 @@ public class DiscoverFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = menu.get(position);
+<<<<<<< HEAD
                 Intent intent;
                 if( item.equals("Events") ){
                     intent = new Intent(getActivity(), EventActivity.class);
@@ -107,10 +119,25 @@ public class DiscoverFragment extends Fragment {
 
         menu = new ArrayList<String>();
         menu.add(topten);
+=======
+                
+                if( item.equals("Events") ){
+                    Intent intent = new Intent(getActivity(), EventActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(), item, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        menu = new ArrayList<String>();
+        menu.add("Season's Top 10");
+>>>>>>> origin/master
         menu.add("Events");
         menu.add("Trails");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+<<<<<<< HEAD
                 R.layout.listviewitem, menu);
         lv.setAdapter(adapter);
         //lv.setMinimumHeight(20);
@@ -193,6 +220,12 @@ public class DiscoverFragment extends Fragment {
                 return null;
             }
         }
+=======
+                android.R.layout.simple_list_item_1, menu);
+        lv.setAdapter(adapter);
+
+        return rootView;
+>>>>>>> origin/master
     }
 
 }

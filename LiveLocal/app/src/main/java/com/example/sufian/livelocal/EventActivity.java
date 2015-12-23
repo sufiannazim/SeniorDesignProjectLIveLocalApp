@@ -63,6 +63,12 @@ public class EventActivity extends AppCompatActivity {
             for (int i=0; i< eventsArray.length(); i++){
                 JSONObject singleEventObj = eventsArray.getJSONObject(i);
                 String singleEventName = singleEventObj.getString("name");
+<<<<<<< HEAD
+=======
+                if( singleEventName.length() > 30 ){
+                    singleEventName = singleEventName.substring(0,30) + "...";
+                }
+>>>>>>> origin/master
                 JSONObject singleEventDateObj = singleEventObj.getJSONObject("field_event_date");
                 String singleEventTimestamp = singleEventDateObj.getString("value");
                 String[] separated = singleEventTimestamp.split(" ");
@@ -132,7 +138,11 @@ public class EventActivity extends AppCompatActivity {
                 JSONObject parameters = new JSONObject();
                 parameters.put( "token", token );
                 parameters.put( "limit", "10" );
+<<<<<<< HEAD
                 parameters.put( "end_date" , "2015-12-19");
+=======
+                parameters.put( "start_date" , "2014-01-01");
+>>>>>>> origin/master
 
                 DataOutputStream wr = new DataOutputStream( connection.getOutputStream() );
 

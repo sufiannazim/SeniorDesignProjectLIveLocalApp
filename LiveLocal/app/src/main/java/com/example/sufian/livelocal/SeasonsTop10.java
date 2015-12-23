@@ -1,20 +1,15 @@
 package com.example.sufian.livelocal;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -26,64 +21,21 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class DiscoverFragment extends Fragment {
-    private List<String> menu;
-    TextView STTtxtView;
+public class SeasonsTop10 extends AppCompatActivity {
     private String token;
-    private String topten;
-
-    public DiscoverFragment() {
-        // Required empty public constructor
-    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
+        setContentView(R.layout.activity_seasons_top10);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_discover, container, false);
-        ListView lv = (ListView) rootView.findViewById(R.id.discoverListView);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item = menu.get(position);
-                Intent intent;
-                if( item.equals("Events") ){
-                    intent = new Intent(getActivity(), EventActivity.class);
-                    startActivity(intent);
-                } else if (item.equals(topten)) {
-                    intent = new Intent(getActivity(), SeasonsTop10.class);
-                    startActivity(intent);
-                } else if (item.equals("Trails")){
-                    Toast.makeText(getActivity(), item, Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
-                }
-                /*
-                switch (item){
-                    case "Events":
-                        intent = new Intent(getActivity(), EventActivity.class);
-                        startActivity(intent);
-                        break;
-                    case "Season's Top Ten":
-                        intent = new Intent(getActivity(), SeasonsTop10.class);
-                        startActivity(intent);
-                        break;
-                    case "Trails":
-                        Toast.makeText(getActivity(), item, Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                        Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
-                        break;
-                }*/
-            }
-        });
+        TextView seasonTop10View = (TextView) findViewById(R.id.seasonsTop10View);
 
         try {
             JSONObject tokenObj = new TokenRequest().execute("http://www.buyctgrown.com/api/system/get_token").get();
@@ -93,10 +45,10 @@ public class DiscoverFragment extends Fragment {
             JSONArray top10Array = seasonsObj.getJSONArray("nodes");
             JSONObject top10Obj = top10Array.getJSONObject(0);
 
-            String seasonsTop10Body = top10Obj.getString("field_top_10_teaser");
-            String temp = Html.fromHtml(seasonsTop10Body).toString();
-            topten = "Season's Top Ten \n" + temp;
-
+            String seasonsTop10Body = top10Obj.getString("field_top_10_body");
+            seasonTop10View.setText(Html.fromHtml(seasonsTop10Body));
+            seasonTop10View.setMovementMethod(new ScrollingMovementMethod());
+            seasonTop10View.setMovementMethod(LinkMovementMethod.getInstance());
         } catch ( ExecutionException e1 ){
             System.out.println( "ExecutionException" );
         } catch ( InterruptedException e2 ){
@@ -104,18 +56,6 @@ public class DiscoverFragment extends Fragment {
         } catch ( JSONException e3 ){
             System.out.println( "JSONException" );
         }
-
-        menu = new ArrayList<String>();
-        menu.add(topten);
-        menu.add("Events");
-        menu.add("Trails");
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.listviewitem, menu);
-        lv.setAdapter(adapter);
-        //lv.setMinimumHeight(20);
-
-        return rootView;
     }
 
     class TokenRequest extends AsyncTask<String, Void, JSONObject> {
@@ -194,5 +134,4 @@ public class DiscoverFragment extends Fragment {
             }
         }
     }
-
 }

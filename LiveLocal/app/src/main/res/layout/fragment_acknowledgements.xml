@@ -1,0 +1,28 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:background="#f2f9f2"
+    tools:context="com.example.sufian.livelocal.AboutFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"></ScrollView>
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="left"
+        android:scrollbars="vertical"
+        android:textSize="17dp"
+        android:text="Funding for this app was provided by UConn Extension. Additional funding support provided by the USDA Specialty Crops Block Grant Program. App concept and function by Jiff Martin and David Dickson at UConn Extension and Ashley Kremser at CitySeed. Content provided through the BuyCTGrown and CT 10% Campaign. Mobile app specification provided by Red Sequoia. Icon designed by and Kevin Noonan at UConn College of Agriculture, Health and Natural Resources, based on original design by LittleBig Shop. All of the programming for the app was done by Sufian, Azm, Salman, Eric, and Nnamdi at University of Connecticut."
+        android:textColor="@color/colorPrimaryDark"
+        android:background="#c6eec7"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+</RelativeLayout>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -11,8 +12,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import java.security.MessageDigest;
@@ -25,11 +28,15 @@ public class MainActivity extends AppCompatActivity{
     NavigationView mNavigationView;
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
+    SessionManager session;
+    Menu menu;
+    boolean hideBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        session = new SessionManager(getApplicationContext());
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mNavigationView = (NavigationView) findViewById(R.id.navView) ;
@@ -44,43 +51,42 @@ public class MainActivity extends AppCompatActivity{
 
                 if (menuItem.getItemId() == R.id.nav_item_home) {
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView,new TabFragment()).commit();
-
+                    fragmentTransaction.replace(R.id.containerView, new TabFragment()).commit();
                 }
 
                 if (menuItem.getItemId() == R.id.nav_item_about) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.containerView,new AboutFragment()).commit();
+                    xfragmentTransaction.replace(R.id.containerView, new AboutFragment()).commit();
                 }
 
                 if (menuItem.getItemId() == R.id.nav_item_privacyPolicy) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.containerView,new PrivacyPolicyFragment()).commit();
+                    xfragmentTransaction.replace(R.id.containerView, new PrivacyPolicyFragment()).commit();
                 }
 
                 if (menuItem.getItemId() == R.id.nav_item_acknowledgements) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.containerView,new AcknowledgementsFragment()).commit();
+                    xfragmentTransaction.replace(R.id.containerView, new AcknowledgementsFragment()).commit();
                 }
 
                 if (menuItem.getItemId() == R.id.nav_item_turkeyGuide) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.containerView,new TurkeyGuideFragment()).commit();
+                    xfragmentTransaction.replace(R.id.containerView, new TurkeyGuideFragment()).commit();
                 }
 
                 if (menuItem.getItemId() == R.id.nav_item_giftGuide) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.containerView,new GiftGuideFragment()).commit();
+                    xfragmentTransaction.replace(R.id.containerView, new GiftGuideFragment()).commit();
                 }
 
                 if (menuItem.getItemId() == R.id.nav_item_valentineGuide) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.containerView,new ValentinesGuideFragment()).commit();
+                    xfragmentTransaction.replace(R.id.containerView, new ValentinesGuideFragment()).commit();
                 }
 
                 if (menuItem.getItemId() == R.id.nav_item_contact) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.containerView,new ContactFragment()).commit();
+                    xfragmentTransaction.replace(R.id.containerView, new ContactFragment()).commit();
                 }
 
                 return false;
@@ -88,31 +94,12 @@ public class MainActivity extends AppCompatActivity{
 
         });
 
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
-        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout, toolbar,R.string.app_name,
-                R.string.app_name);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout, toolbar,R.string.app_name,R.string.app_name);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
         mDrawerToggle.syncState();
-        PackageInfo info;
-        try {
-            info = getPackageManager().getPackageInfo("com.example.sufian.livelocal", PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md;
-                md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                String something = new String(Base64.encode(md.digest(), 0));
-                //String something = new String(Base64.encodeBytes(md.digest()));
-                Log.e("hash key1", something);
-            }
-        } catch (PackageManager.NameNotFoundException e1) {
-            Log.e("name not found", e1.toString());
-        } catch (NoSuchAlgorithmException e) {
-            Log.e("no such an algorithm", e.toString());
-        } catch (Exception e) {
-            Log.e("exception", e.toString());
-        }
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
     }
 
@@ -123,4 +110,34 @@ public class MainActivity extends AppCompatActivity{
                 new ActivityResultEvent(requestCode, resultCode, data));
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        this.menu = menu;
+        getMenuInflater().inflate(R.menu.login_menu, menu);
+
+        if(session.isLoggedIn()) {
+            for (int i = 0; i < menu.size(); i++)
+                menu.getItem(i).setVisible(true);
+        }
+        else {
+            for (int i = 0; i < menu.size(); i++)
+                menu.getItem(i).setVisible(false);
+        }
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.logOut:
+                session.logoutUser();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

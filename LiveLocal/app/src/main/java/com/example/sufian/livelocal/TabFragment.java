@@ -1,5 +1,6 @@
 package com.example.sufian.livelocal;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -8,14 +9,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TabFragment extends Fragment {
 
     private Toolbar toolbar;
+    SessionManager session;
 
     private int[] tabIcons = {
             R.drawable.ic_home_tab,
@@ -36,14 +41,28 @@ public class TabFragment extends Fragment {
         tabLayout = (TabLayout) x.findViewById(R.id.tabs);
         viewPager = (ViewPager) x.findViewById(R.id.viewpager);
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
+        session = new SessionManager(getContext());
 
         tabLayout.post(new Runnable() {
             @Override
             public void run() {
                 tabLayout.setupWithViewPager(viewPager);
+                tabLayout.setOnTabSelectedListener(
+                        new TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
+                            @Override
+                            public void onTabSelected(TabLayout.Tab tab) {
+                                super.onTabSelected(tab);
+                                int numTab = tab.getPosition();
+                                //Toast.makeText(getContext(), "Position Number: " + numTab, Toast.LENGTH_SHORT).show();
+                                if (numTab == 2) {
+                                    session.checkLogin();
+                                }
+                            }
+                        });
                 setupTabLayout(tabLayout);
             }
         });
+
         return x;
     }
 

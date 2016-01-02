@@ -17,8 +17,10 @@ public class SplashScreen extends Activity {
 
         Thread timerThread = new Thread(){
             public void run(){
+
+                getDatafromAPI();
                 try{
-                    sleep(3000);
+                    sleep(100);
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{
@@ -35,6 +37,15 @@ public class SplashScreen extends Activity {
         // TODO Auto-generated method stub
         super.onPause();
         finish();
+    }
+
+    public void getDatafromAPI(){
+
+        WebAPICommunication.getAPIToken();
+        WebAPICommunication.getCTStats();
+        WebAPICommunication.getSeasonsTopTenIntro();
+        WebAPICommunication.getSeasonsTopTen();
+        WebAPICommunication.getEventList();
     }
 
 }

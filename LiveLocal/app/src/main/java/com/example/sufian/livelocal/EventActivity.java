@@ -7,9 +7,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,12 +25,35 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 public class EventActivity extends AppCompatActivity {
     private EventListAdapter adapter;
     private String token;
+    private String[] eventIdArray;
+    private String[] eventAddress;
+    private String[] eventDateArray;
+    private String[] eventTitleArray;
+    private String[] eventLatArray;
+    private String[] eventLngArray;
+    private static String eventAddr;
+    private static String eventDetail;
+    private static String eventDate;
+    private static String eventTitle;
+    private static String eventLat;
+    private static String eventLng;
+    private TextView backbtn;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +62,27 @@ public class EventActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        eventIdArray = new String[10];
+        eventAddress = new String[10];
+        eventDateArray = new String[10];
+        eventTitleArray = new String[10];
+        eventLatArray = new String[10];
+        eventLngArray = new String[10];
+
         ListView lv = (ListView) findViewById(R.id.listView);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                eventAddr = eventAddress[position];
+                eventDetail = eventIdArray[position];
+                eventDate = eventDateArray[position];
+                eventTitle = eventTitleArray[position];
+                eventLat = eventLatArray[position];
+                eventLng = eventLngArray[position];
+                //Toast.makeText(getApplicationContext(), "Position Number: " + position + " id: " + eventIdArray[position], Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), EventDetailActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -49,111 +90,69 @@ public class EventActivity extends AppCompatActivity {
         adapter = new EventListAdapter(this, eventsArray);
         populateAdapter(adapter);
         lv.setAdapter(adapter);
-    }
 
-    public void populateAdapter(EventListAdapter adapter){
-        try {
-            JSONObject tokenObj = new APIRequest().execute("http://www.buyctgrown.com/api/system/get_token").get();
-            token = tokenObj.getString("token").toString();
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-
-            JSONObject eventsObj = new EventRequest().execute("http://www.buyctgrown.com/api/event/list").get();
-            JSONArray eventsArray = eventsObj.getJSONArray("events");
-
-            for (int i=0; i< eventsArray.length(); i++){
-                JSONObject singleEventObj = eventsArray.getJSONObject(i);
-                String singleEventName = singleEventObj.getString("name");
-                JSONObject singleEventDateObj = singleEventObj.getJSONObject("field_event_date");
-                String singleEventTimestamp = singleEventDateObj.getString("value");
-                String[] separated = singleEventTimestamp.split(" ");
-                String singleEventDate = separated[0];
-                adapter.add( new Event(singleEventName, singleEventDate) );
+        backbtn = (TextView) findViewById(R.id.eventBack);
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                finish();
             }
-        } catch ( ExecutionException e1 ){
-            System.out.println( "ExecutionException" );
-        } catch ( InterruptedException e2 ){
-            System.out.println( "InterruptedException" );
-        } catch ( JSONException e3 ){
-            System.out.println( "JSONException" );
-        }
+        });
     }
 
-    class APIRequest extends AsyncTask<String, Void, JSONObject>{
-        private Exception exception;
+    public static String getEventAddr(){
+        return eventAddr;
+    }
 
-        protected JSONObject doInBackground(String... params) {
+    public static String getEventDetail(){
+        return eventDetail;
+    }
+
+    public static String getEventDate(){
+        return eventDate;
+    }
+
+    public static String getEventTitle(){
+        return eventTitle;
+    }
+
+    public static String getEventLat(){
+        return eventLat;
+    }
+
+    public static String getEventLng(){
+        return eventLng;
+    }
+
+    public void populateAdapter(EventListAdapter adapter) {
+
+        HashMap hashMap = WebAPICommunication.geteventListHashMap();
+        JSONArray eventsArray = (JSONArray) hashMap.get("eventsArray");
+        eventDateArray = (String[]) hashMap.get("eventDateArray");
+        eventTitleArray = (String[]) hashMap.get("eventTitleArray");
+        eventAddress = (String []) hashMap.get("eventAddress");
+        eventIdArray = (String[]) hashMap.get("eventIdArray");
+        eventLatArray = (String []) hashMap.get("eventLatArray");
+        eventLngArray = (String[]) hashMap.get("eventLngArray");
+
+        for (int i = 0; i < eventsArray.length(); i++) {
+
+            String[] separated = eventDateArray[i].split(" ");
+            String singleEventDate = separated[0];
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+            SimpleDateFormat formats = new SimpleDateFormat("MMMM dd, yyyy");
+            Date dt;
+            String formatedDate;
             try {
-                URL url = new URL( params[0] );
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-                connection.setDoOutput(true);
-                connection.setRequestMethod("POST");
-                connection.setRequestProperty("Content-Type", "application/json");
-
-                JSONObject parameters = new JSONObject();
-                parameters.put( "hash", "274ffe280ad2956ea85f35986958095d" );
-                parameters.put( "seed", "10" );
-
-                DataOutputStream wr = new DataOutputStream( connection.getOutputStream() );
-
-                wr.writeBytes( parameters.toString() );
-
-                wr.flush();
-                wr.close();
-
-                BufferedReader r = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                StringBuilder result = new StringBuilder();
-                String line;
-                while ((line = r.readLine()) != null) {
-                    result.append(line);
-                }
-
-                JSONObject obj = new JSONObject(result.toString());
-                return obj;
-            } catch (Exception e){
-                this.exception = e;
-                return null;
+                dt = format.parse(singleEventDate);
+                formatedDate = formats.format(dt);
+                adapter.add(new Event(eventTitleArray[i], formatedDate));
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
         }
+
     }
 
-    class EventRequest extends AsyncTask<String, Void, JSONObject> {
-        private Exception exception;
-
-        protected JSONObject doInBackground(String... params) {
-            try {
-                URL url = new URL( params[0] );
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-                connection.setDoOutput(true);
-                connection.setRequestMethod("POST");
-                connection.setRequestProperty("Content-Type", "application/json");
-
-                JSONObject parameters = new JSONObject();
-                parameters.put( "token", token );
-                parameters.put( "limit", "10" );
-                parameters.put( "end_date" , "2015-12-19");
-
-                DataOutputStream wr = new DataOutputStream( connection.getOutputStream() );
-
-                wr.writeBytes( parameters.toString() );
-
-                wr.flush();
-                wr.close();
-
-                BufferedReader r = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                StringBuilder result = new StringBuilder();
-                String line;
-                while ((line = r.readLine()) != null) {
-                    result.append(line);
-                }
-
-                JSONObject obj = new JSONObject(result.toString());
-                return obj;
-            } catch (Exception e){
-                this.exception = e;
-                return null;
-            }
-        }
-    }
 }

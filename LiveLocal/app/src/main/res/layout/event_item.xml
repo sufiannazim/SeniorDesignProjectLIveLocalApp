@@ -25,12 +25,13 @@
         android:id="@+id/evName"
         android:layout_below="@+id/evDate"
         android:textSize="18sp"
-        android:textStyle="bold|italic"
+        android:textStyle="bold"
         android:textColor="#e64a19"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:typeface="serif"/>
 
 
 

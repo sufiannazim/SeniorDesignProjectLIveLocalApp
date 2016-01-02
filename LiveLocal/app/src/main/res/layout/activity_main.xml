@@ -27,6 +27,7 @@
             android:src="@drawable/logo_pledge"
             android:scaleType="center" />
 
+
     </android.support.v7.widget.Toolbar>
 
         <android.support.v4.widget.DrawerLayout
@@ -53,6 +54,7 @@
                 android:background="#c6eec7"
                 app:itemTextColor="@color/colorPrimaryDark"
                 app:menu="@menu/menu_main" />
+
 
         </android.support.v4.widget.DrawerLayout>
 

@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.sufian.livelocal.LoginActivity"
     tools:showIn="@layout/activity_login">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:paddingTop="56dp"
+        >
 
         <ImageView
             android:layout_width="match_parent"
@@ -22,59 +29,43 @@
             android:paddingRight="10dp"
             android:paddingBottom="20dp"/>
 
-
-    <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/editTextUsername"
-            android:textCursorDrawable="@null"
-            android:textColor="#000000"
-            android:layout_width="325dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress|textPersonName"
-            android:ems="10"
-            android:clickable="true"
             android:hint="Username or Email"
-            android:layout_gravity="right|center_vertical"
-            android:imeOptions="actionDone"
-            android:autoText="false"
-            android:backgroundTintMode="src_in"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:paddingTop="40dp"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:layout_below="@+id/imageView" />
+            android:textCursorDrawable="@color/colorPrimaryDark"
+            app:met_baseColor="@color/colorPrimaryDark"
+            app:met_primaryColor="#000000"
+            android:textSize="20sp"
+            app:met_floatingLabel="highlight"
+            android:inputType="textEmailAddress|textPersonName"/>
 
-    <EditText
+        <!-- Password Label
+        app:met_maxCharacters="20"
+        -->
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/editTextPassword"
-            android:layout_width="325dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:textCursorDrawable="@null"
-            android:ems="10"
             android:hint="Password"
-            android:backgroundTintMode="src_over"
-            android:clickable="true"
-            android:layout_gravity="right|center_vertical"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:paddingTop="20dp"
-            android:layout_below="@+id/editTextUsername"
-            android:textColor="#000000"/>
+            android:textCursorDrawable="@color/colorPrimaryDark"
+            app:met_baseColor="@color/colorPrimaryDark"
+            app:met_primaryColor="#000000"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"
+            app:met_floatingLabel="highlight"
+            android:inputType="textPassword"/>
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:text="Log in"
             android:id="@+id/buttonLogin"
-            android:background="@color/colorPrimaryDark"
+            android:background="#c6eec7"
             android:textStyle="bold"
-            android:textColor="@color/textColorPrimary"
-            android:layout_marginTop="26dp"
+            android:textColor="#e64a19"
             android:clickable="true"
             android:layout_below="@+id/editTextPassword"
             android:layout_alignRight="@+id/editTextPassword"
@@ -82,17 +73,19 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Forget Password?"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        android:id="@+id/forgetPasswordbtn"
-        android:layout_below="@+id/buttonLogin"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Forget Password?"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            android:id="@+id/forgetPasswordbtn"
+            android:layout_below="@+id/buttonLogin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center_horizontal" />
 
+    </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>

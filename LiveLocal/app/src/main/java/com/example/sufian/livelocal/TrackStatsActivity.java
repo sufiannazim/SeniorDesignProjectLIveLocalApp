@@ -1,25 +1,17 @@
 package com.example.sufian.livelocal;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
-import com.facebook.share.model.SharePhoto;
-import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareButton;
+import com.facebook.share.widget.ShareDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,6 +29,7 @@ public class TrackStatsActivity extends AppCompatActivity {
     private TextView trackStatsData;
     private TextView trackStatsLastPart;
     private ShareButton shareButton;
+    private ShareDialog shareDialog;
     private String token;
     private SessionManager session;
     private String sid;
@@ -59,12 +52,32 @@ public class TrackStatsActivity extends AppCompatActivity {
         trackStatsData = (TextView) findViewById((R.id.textViewMessageData));
         trackStatsLastPart = (TextView) findViewById((R.id.textViewMessageLastPart));
 
-        shareButton = (ShareButton) findViewById(R.id.share_btnTwo);
-        shareButton.setOnClickListener(new View.OnClickListener() {
+        //shareButton = (ShareButton) findViewById(R.id.share_btnTwo);
+
+        //shareDialog = (ShareDialog) findViewById(R.id.share_btnTwo);
+        /*
+        shareDialog.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                postPicture();
+                shareDialog = new ShareDialog(TrackStatsActivity.this);
+                ShareOpenGraphObject object = new ShareOpenGraphObject.Builder()
+                        .putString("og:type", "books.book")
+                        .putString("og:title", "A Game of Thrones")
+                        .putString("og:description","In the frozen wastes to the north of Winterfell, sinister and supernatural forces are mustering.")
+                        .putString("books:isbn", "0-553-57340-3").build();
+
+                ShareOpenGraphAction action = new ShareOpenGraphAction.Builder()
+                        .setActionType("books.reads").putObject("book", object)
+                        .build();
+                ShareOpenGraphContent content = new ShareOpenGraphContent.Builder()
+                        .setPreviewPropertyName("book")
+                        .setAction(action)
+                        .build();
+                shareDialog.show(content);
+
             }
-        });
+            }
+        });*/
+
 
         try {
             //gets the token
@@ -100,6 +113,7 @@ public class TrackStatsActivity extends AppCompatActivity {
         });
     }
 
+
     private View.OnClickListener trackButtonClickListener = new View.OnClickListener() {
 
         @Override
@@ -112,11 +126,6 @@ public class TrackStatsActivity extends AppCompatActivity {
 
     public static int getStatData(){
         return statData;
-    }
-
-    public void postPicture() {
-
-        shareButton.performClick();
     }
 
     class getStatRequest extends AsyncTask<String, Void, JSONObject> {

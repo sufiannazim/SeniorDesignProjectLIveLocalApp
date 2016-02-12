@@ -92,18 +92,23 @@ public class TrackFragment extends Fragment {
         @Override
         public void onClick(View v) {
 
-            Intent intent = new Intent(getContext(), TrackStatsActivity.class);
-            startActivity(intent);
-            /*
+            //Intent intent = new Intent(getContext(), TrackStatsActivity.class);
+            //startActivity(intent);
             try {
                 amountSpent = Integer.parseInt(amount.getText().toString());
                 //gets the token
                 token = WebAPICommunication.getToken();
+                String apiMethodTwo = "ct/report/answer";
+                JSONObject tokenObjTwo = new submitAmountRequest().execute("http://www.buyctgrown.com/api/" + apiMethodTwo).get();
+                String requestStatusTwo = tokenObjTwo.getString("status");
 
-                String apiMethod = "ct/report/answer";
-                JSONObject tokenObj = new submitAmountRequest().execute("http://www.buyctgrown.com/api/" + apiMethod).get();
-                requestStatus = tokenObj.getString("status");
-
+                if (requestStatusTwo.contains("ok")){
+                    Toast.makeText(getContext(), "Request Sucessfull", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), TrackStatsActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getContext(), "Invalid Amount Entered", Toast.LENGTH_SHORT).show();
+                }
             } catch (ExecutionException e1) {
                 Toast.makeText(getContext(), "Invalid Request", Toast.LENGTH_SHORT).show();
                 System.out.println("ExecutionException");
@@ -114,13 +119,6 @@ public class TrackFragment extends Fragment {
                 Toast.makeText(getContext(), "Invalid Request", Toast.LENGTH_SHORT).show();
                 System.out.println("JSONException");
             }
-            if (requestStatus.equals("ok") ){
-                Toast.makeText(getContext(), "Request Sucessfull", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(), TrackStatsActivity.class);
-                startActivity(intent);
-            }else {
-                Toast.makeText(getContext(), "Invalid Request", Toast.LENGTH_SHORT).show();
-            }*/
         }
     };
 
@@ -139,10 +137,46 @@ public class TrackFragment extends Fragment {
                 JSONObject parameters = new JSONObject();
                 parameters.put("token", token);
                 parameters.put("sid", sid);
-                parameters.put("source_local_this_week", "Y");
-                parameters.put("source_local_farms", "test");
-                parameters.put("purchase_this_week", amountSpent);
-                parameters.put("source_local_why_not", "SUPPLY");
+                parameters.put("amount", amountSpent);
+                parameters.put("sources", "");
+
+                DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+
+                wr.writeBytes(parameters.toString());
+                wr.flush();
+                wr.close();
+
+                BufferedReader r = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder result = new StringBuilder();
+                String line;
+                while ((line = r.readLine()) != null) {
+                    result.append(line);
+                }
+
+                JSONObject obj = new JSONObject(result.toString());
+                return obj;
+            } catch (Exception e) {
+                this.exception = e;
+                return null;
+            }
+        }
+    }
+
+    class getQuestions extends AsyncTask<String, Void, JSONObject> {
+        private Exception exception;
+
+        protected JSONObject doInBackground(String... params) {
+            try {
+                URL url = new URL(params[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+                connection.setDoOutput(true);
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+
+                JSONObject parameters = new JSONObject();
+                parameters.put("token", token);
+                parameters.put("sid", sid);
 
                 DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
 

@@ -6,6 +6,11 @@ package com.example.sufian.livelocal;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class SplashScreen extends Activity {
 
@@ -14,13 +19,14 @@ public class SplashScreen extends Activity {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
+        StartAnimations();
 
         Thread timerThread = new Thread(){
             public void run(){
 
                 getDatafromAPI();
                 try{
-                    sleep(100);
+                    sleep(1000);
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{
@@ -48,4 +54,11 @@ public class SplashScreen extends Activity {
         WebAPICommunication.getEventList();
     }
 
+    private void StartAnimations() {
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
+        anim.reset();
+        LinearLayout l = (LinearLayout) findViewById(R.id.splashAnim);
+        l.clearAnimation();
+        l.startAnimation(anim);
+    }
 }

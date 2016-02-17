@@ -105,7 +105,8 @@ public class DiscoverFragment extends Fragment {
     private View.OnClickListener trailsButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), TrailsActivity.class);
+            startActivity(intent);
         }
     };
 

@@ -89,6 +89,10 @@
         <activity
             android:name=".TrackingCalculatorActivity"
             android:theme="@style/MyMaterialTheme"></activity>
+        <activity
+            android:name=".TrailsActivity"
+            android:label="title_activity_trails"
+            android:theme="@style/MyMaterialTheme"></activity>
     </application>
 
 </manifest>

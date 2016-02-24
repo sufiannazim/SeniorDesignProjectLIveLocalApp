@@ -36,7 +36,11 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="facebook_app_id">926592274061085</string>
     <string name="share">Share</string>
-    <string name="title_activity_seasons_top10">SeasonsTop10</string>
+    <string name="title_activity_seasons_top10">Season\'s Top 10</string>
+    <string name="title_activity_trails">Trails</string>
+    <string name="title_activity_events">Events</string>
+    <string name="title_activity_establishments_list">Trails</string>
+    <string name="title_activity_establishment">Establishment</string>
     <string name="title_activity_event_detail">EventDetailActivity</string>
     <string name="title_activity_login">Login</string>
 

@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,12 +64,13 @@ class Trail{
     String region;
     ArrayList<String> categories;
     ArrayList<String> seasons;
+    JSONArray establishments;
 
-    public Trail( String trailName, String trailRegion, ArrayList<String> trailCategories, ArrayList<String> trailSeasons){
+    public Trail( String trailName, String trailRegion, ArrayList<String> trailCategories, ArrayList<String> trailSeasons, JSONArray trailEstablishments ){
         this.name = trailName;
         this.region = trailRegion;
         this.categories = trailCategories;
         this.seasons = trailSeasons;
+        this.establishments = trailEstablishments;
     }
 }
-

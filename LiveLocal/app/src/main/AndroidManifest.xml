@@ -57,7 +57,11 @@
         </activity>
         <activity
             android:name=".EventActivity"
+<<<<<<< HEAD
             android:label="@string/title_activity_events" />
+=======
+            android:label="@string/title_activity_events"  />
+>>>>>>> origin/master
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -102,6 +106,7 @@
         <activity
             android:name=".EstablishmentActivity"
             android:label="@string/title_activity_establishment"
+<<<<<<< HEAD
             android:theme="@style/MyMaterialTheme" />
         <activity
             android:name=".WebLinksView"
@@ -110,6 +115,8 @@
         <activity
             android:name=".SignUp"
             android:label="@string/title_activity_sign_up"
+=======
+>>>>>>> origin/master
             android:theme="@style/MyMaterialTheme"></activity>
     </application>
 

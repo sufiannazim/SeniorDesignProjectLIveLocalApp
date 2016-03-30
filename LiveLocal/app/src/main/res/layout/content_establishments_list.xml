@@ -24,7 +24,10 @@
         android:id="@+id/establishmentsListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:background="#c6eec7"
+=======
+>>>>>>> origin/master
         android:layout_below="@+id/noEstabFlag"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

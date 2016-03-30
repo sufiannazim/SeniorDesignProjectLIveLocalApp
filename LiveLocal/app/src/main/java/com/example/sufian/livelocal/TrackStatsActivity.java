@@ -8,11 +8,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -84,12 +86,18 @@ public class TrackStatsActivity extends AppCompatActivity {
             token = WebAPICommunication.getToken();
             String apiMethod = "ct/dashboard";
             JSONObject tokenObj = new getStatRequest().execute("http://www.buyctgrown.com/api/" + apiMethod).get();
+
+            JSONObject weeklydataObj = tokenObj.getJSONObject("graph_data");
+            JSONObject weeklystatOjb = weeklydataObj.getJSONObject("my_progress");
+            JSONArray  weeklyDataArray = weeklystatOjb.getJSONArray("data");
+            statData = weeklyDataArray.getInt(9);
+
             JSONObject dataObj = tokenObj.getJSONObject("sidebar_data");
             JSONObject statOjb = dataObj.getJSONObject("first_row");
             String stat = statOjb.getString("data");
-            String trimNumber = stat.substring(1);
-            //Toast.makeText(getApplicationContext(), "Trim: " + trimNumber, Toast.LENGTH_SHORT).show();
-            statData = Integer.parseInt(trimNumber);
+            //String trimNumber = stat.substring(1);
+            //Toast.makeText(getApplicationContext(), "Weekly Amount: " + weeklyStat, Toast.LENGTH_SHORT).show();
+            //statData = Integer.parseInt(trimNumber);
             trackStatsFirstPart.setText("Congratulations! You have spent\n");
             trackStatsData.setText(stat);
             trackStatsLastPart.setText("on Connecticut Grown products since you took the pledge.");

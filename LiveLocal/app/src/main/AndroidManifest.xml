@@ -56,7 +56,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EventActivity" />
+            android:name=".EventActivity"
+            android:label="@string/title_activity_events" />
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -70,16 +71,17 @@
 
         <activity
             android:name=".SeasonsTop10"
+            android:label="@string/title_activity_seasons_top10"
             android:theme="@style/MyMaterialTheme" />
         <activity
             android:name=".EventDetailActivity"
             android:theme="@style/MyMaterialTheme" />
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/MyMaterialTheme"
             android:configChanges="orientation"
             android:hardwareAccelerated="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:theme="@style/MyMaterialTheme"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".TrackStatsActivity"
             android:theme="@style/MyMaterialTheme" />
@@ -88,10 +90,26 @@
             android:theme="@style/MyMaterialTheme" />
         <activity
             android:name=".TrackingCalculatorActivity"
-            android:theme="@style/MyMaterialTheme"></activity>
+            android:theme="@style/MyMaterialTheme" />
         <activity
             android:name=".TrailsActivity"
-            android:label="title_activity_trails"
+            android:label="@string/title_activity_trails"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".EstablishmentsListActivity"
+            android:label="@string/title_activity_establishments_list"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".EstablishmentActivity"
+            android:label="@string/title_activity_establishment"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".WebLinksView"
+            android:label="@string/title_activity_web_links_view"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".SignUp"
+            android:label="@string/title_activity_sign_up"
             android:theme="@style/MyMaterialTheme"></activity>
     </application>
 

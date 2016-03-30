@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="15dp"
+    android:padding="12dp"
     android:background="#f2f9f2"
     tools:context="com.example.sufian.livelocal.AboutFragment">
 
@@ -11,6 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
     <TextView
+        android:padding="15dp"
+        android:background="@drawable/black"
         android:id="@+id/label"
         android:layout_alignParentTop="true"
         android:layout_width="fill_parent"
@@ -20,7 +22,7 @@
         android:textSize="15dp"
         android:text="This privacy notice applies only to the Live Local App and explains the UConn Extension practices concerning the collection, use, and disclosure of user information. User information collected by the Live Local App will only be used as outlined in the Privacy Notice. \n\n Collection and Use \n\n Except as provided below, we do not collect or use the technical information discussed in this section to identify individual users. \n\n Passive/Automatic Collection \n\n The Live Local App does not collect any technical or personal information unless authorized or offered by the user as described below. \n\n Active/Manual/Voluntary Collection \n\n The mapping features of the Live Local app do not use location information unless specifically authorized by the user. \n\n This app uses the Google Analytics SDK for iOS to track general usage statistics and performance. No personally identifiable data is collected through Google Analytics. Data collected is used to track the number of active users, general geographic locations of users, usage of app screens and features, and the number and type of application crashes. \n\n Information Usage \n\n Information about expenditures on local food and gardening products that is provided to UConn Extension voluntarily by app users is used to track total spending by all participants in the CT 10% Campaign. Any and all requests for limits on this use by owners will be honored. \n\n Information Used for Contact \n\n UConn Extension will only contact a user regarding the App if the user has voluntarily provided contact information to respond to and/or acknowledge comments, problems, and feedback. \n\n Use of Third Party Services \n\n The Live Local App uses facebook for users to share content with their own personal facebook account or to the Live Local facebook group. Users should refer to facebookâ€™s privacy policy for more information. \n\n Privacy Notice Changes \n\n UConn Extension may make changes to this policy in the future. Any such changes will be consistent with our commitment to user privacy and will be clearly posted in a revised privacy notice. Only data collected from the time of the revision forward will be used under the new policy. \n\n Contact Us \n\n If you feel that this site is not following its stated policy and communicating with UConn Extension does not resolve the matter, or if you have general questions or concerns about privacy or data security at the University of Connecticut, please contact the Universityâ€™s Privacy officer at (860) 486-5256 or Rachel.krinsky@uconn.edu, or the Information Security Office at security@uconn.edu or (860) 486-8255. \n\n\n Effective: June 15, 2015"
         android:textStyle="bold"
-        android:background="#c6eec7"/>
+        />
     </ScrollView>
 
 </RelativeLayout>

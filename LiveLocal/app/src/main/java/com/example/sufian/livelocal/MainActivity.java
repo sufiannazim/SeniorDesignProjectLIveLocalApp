@@ -54,6 +54,11 @@ public class MainActivity extends AppCompatActivity{
                     fragmentTransaction.replace(R.id.containerView, new TabFragment()).commit();
                 }
 
+                if (menuItem.getItemId() == R.id.nav_item_livingLocal) {
+                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.containerView, new LivingLocal()).commit();
+                }
+
                 if (menuItem.getItemId() == R.id.nav_item_about) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                     xfragmentTransaction.replace(R.id.containerView, new AboutFragment()).commit();
@@ -82,6 +87,16 @@ public class MainActivity extends AppCompatActivity{
                 if (menuItem.getItemId() == R.id.nav_item_valentineGuide) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                     xfragmentTransaction.replace(R.id.containerView, new ValentinesGuideFragment()).commit();
+                }
+
+                if (menuItem.getItemId() == R.id.nav_item_suggestListing) {
+                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.containerView, new SuggestListing()).commit();
+                }
+
+                if (menuItem.getItemId() == R.id.nav_item_businessRegisteration) {
+                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.containerView, new BusinessRegistration()).commit();
                 }
 
                 if (menuItem.getItemId() == R.id.nav_item_contact) {

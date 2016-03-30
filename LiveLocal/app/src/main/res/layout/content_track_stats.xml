@@ -80,7 +80,7 @@
             android:text="Find out how close you are to reach 10%"
             android:background="#e64a19"
             android:textColor="#ffffff"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:id="@+id/trackBtn"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"

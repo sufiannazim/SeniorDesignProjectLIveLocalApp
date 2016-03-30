@@ -43,6 +43,9 @@ public class TabFragment extends Fragment {
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
         session = new SessionManager(getContext());
 
+        //FragmentManager fm = getActivity().getSupportFragmentManager();
+        //fm.popBackStack();
+
         tabLayout.post(new Runnable() {
             @Override
             public void run() {

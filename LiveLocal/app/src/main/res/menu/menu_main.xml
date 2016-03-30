@@ -11,6 +11,10 @@
         android:id="@+id/nav_item_home"
         android:icon="@drawable/home"/>
 
+        <item android:title="Living Local in CT"
+            android:id="@+id/nav_item_livingLocal"
+            android:icon="@drawable/ic_person"/>
+
     <item android:title="About"
         android:id="@+id/nav_item_about"
         android:icon="@drawable/about"/>
@@ -47,6 +51,25 @@
 
     </item>
 
+    <item android:title="Business Users">
+
+        <menu
+            android:id="@+id/menu_businessUsers"
+            android:checkableBehavior="single">
+
+            <item android:title="Suggest a Listing"
+                android:id="@+id/nav_item_suggestListing"
+                android:icon="@drawable/buying"/>
+
+            <item android:title="Business Registration"
+                android:id="@+id/nav_item_businessRegisteration"
+                android:icon="@drawable/buying"/>
+        </menu>
+
+    </item>
+
+
+
     <group
         android:id="@+id/menu_contact"
         android:checkableBehavior="single">
@@ -55,5 +78,6 @@
             android:id="@+id/nav_item_contact"
             android:icon="@drawable/contact1"/>
     </group>
+
 
 </menu>

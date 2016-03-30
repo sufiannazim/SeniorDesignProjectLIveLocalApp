@@ -12,9 +12,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -138,7 +142,7 @@ public class WebAPICommunication {
 
         try {
             parameters.put( "token", token );
-            parameters.put( "limit", "10" );
+            //parameters.put( "limit", "10" );
             String Date = "";
             final Calendar cal = Calendar.getInstance();
             int dd = cal.get(Calendar.DAY_OF_MONTH);
@@ -149,6 +153,39 @@ public class WebAPICommunication {
 
             JSONObject eventsObj = new APIDataRequest().execute("http://www.buyctgrown.com/api/event/list").get();
             JSONArray eventsArray = eventsObj.getJSONArray("events");
+
+            JSONArray sortedEventsArray = new JSONArray();
+
+            final List<JSONObject> jsonValues = new ArrayList<JSONObject>();
+            for (int i = 0; i < eventsArray.length(); i++) {
+                jsonValues.add(eventsArray.getJSONObject(i));
+            }
+            Collections.sort(jsonValues, new Comparator<JSONObject>() {
+                private static final String KEY_NAME = "field_event_date";
+
+                @Override
+                public int compare(JSONObject a, JSONObject b) {
+                    String valA = new String();
+                    String valB = new String();
+
+                    try {
+                        JSONObject ObjA =  a.getJSONObject(KEY_NAME);
+                        JSONObject ObjB =  b.getJSONObject(KEY_NAME);
+                        valA = ObjA.getString("value");
+                        valB = ObjB.getString("value");
+                    } catch (JSONException e) {
+                        //do something
+                    }
+
+                    return valA.compareTo(valB);
+                }
+            });
+
+            for (int i = 0; i < eventsArray.length(); i++) {
+                sortedEventsArray.put(jsonValues.get(i));
+            }
+
+            eventsArray = sortedEventsArray;
 
             for (int i=0; i< eventsArray.length(); i++){
                 JSONObject singleEventObj = eventsArray.getJSONObject(i);

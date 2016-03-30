@@ -167,16 +167,13 @@ public class LoginActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.register:
-                String url = "http://www.buyctgrown.com/user-registration/business/user-account";
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(url));
+                Intent intent = new Intent(this, SignUp.class);
                 startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
     class LoginRequest extends AsyncTask<String, Void, JSONObject>{
         private Exception exception;

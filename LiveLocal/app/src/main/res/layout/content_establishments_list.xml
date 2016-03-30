@@ -9,16 +9,24 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.sufian.livelocal.TrailsActivity"
-    tools:showIn="@layout/activity_trails">
+    tools:context="com.example.sufian.livelocal.EstablishmentsListActivity"
+    tools:showIn="@layout/activity_establishments_list">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/noEstabFlag"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <ListView
-        android:id="@+id/trailListView"
+        android:id="@+id/establishmentsListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#c6eec7"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/noEstabFlag"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-</RelativeLayout>
 
+</RelativeLayout>

@@ -45,6 +45,10 @@ public class DiscoverFragment extends Fragment {
     private TextView eventTitle;
     private TextView trails;
     private TextView trailsTitle;
+    private TextView FishingTabbar;
+    private TextView HuntingTabbar;
+    private static String weblink;
+    private static String title;
 
     public DiscoverFragment() {
         // Required empty public constructor
@@ -82,6 +86,16 @@ public class DiscoverFragment extends Fragment {
         seasonTopTenTitle.setText(Html.fromHtml("<font color='#e64a19'>Season's Top Ten</font>"));
         seasonTopTen.setText(Html.fromHtml("<font color='#795548'>" + topten + "</font>"));
 
+        FishingTabbar = (TextView) rootView.findViewById((R.id.textViewFishingTabbar));
+        FishingTabbar.setText(Html.fromHtml("<font color='#e64a19'>Fishing</font>"));
+        FishingTabbar.setOnClickListener(FishingTabbarButtonClickListener);
+
+
+
+        HuntingTabbar = (TextView) rootView.findViewById((R.id.textViewHuntingTabbar));
+        HuntingTabbar.setText(Html.fromHtml("<font color='#e64a19'>Hunting</font>"));
+        HuntingTabbar.setOnClickListener(HuntingTabbarButtonClickListener);
+
 
         return rootView;
     }
@@ -109,5 +123,34 @@ public class DiscoverFragment extends Fragment {
             startActivity(intent);
         }
     };
+
+    private View.OnClickListener FishingTabbarButtonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            title = "Fishing";
+            weblink = "http://www.ct.gov/deep/cwp/view.asp?a=2696&q=322708&deepNav_GID=1630";
+            Intent intent = new Intent(getActivity(), WebLinksView.class);
+            startActivity(intent);
+        }
+    };
+
+    private View.OnClickListener HuntingTabbarButtonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            title = "Hunting";
+            weblink = "http://www.ct.gov/deep/cwp/view.asp?a=2700&q=323414&deepNav_GID=1633";
+            Intent intent = new Intent(getActivity(), WebLinksView.class);
+            startActivity(intent);
+        }
+    };
+
+    public static String getWebLink(){
+        return weblink;
+    }
+
+    public static String getViewTitle(){
+        return title;
+    }
+
 
 }

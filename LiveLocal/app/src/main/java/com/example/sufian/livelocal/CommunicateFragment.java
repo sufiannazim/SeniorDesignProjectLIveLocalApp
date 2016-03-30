@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -206,7 +207,16 @@ public class CommunicateFragment extends Fragment {
                     dialog.cancel();
                 }
             });
-            shareDialog.show();
+
+            final AlertDialog alert = shareDialog.create();
+            alert.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface arg0) {
+                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE);
+                    alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLUE);
+                }
+            });
+            alert.show();
         }
         else {
             counter = 0;

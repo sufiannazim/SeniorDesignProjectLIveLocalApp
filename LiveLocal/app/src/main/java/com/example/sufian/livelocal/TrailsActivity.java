@@ -1,13 +1,16 @@
 package com.example.sufian.livelocal;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +28,6 @@ public class TrailsActivity extends AppCompatActivity {
     private TrailsListAdapter adapter;
     private String token;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trails);
@@ -33,16 +35,25 @@ public class TrailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ListView lv = (ListView) findViewById(R.id.trailListView);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            }
-        });
-        ArrayList<Trail> trailsArray = new ArrayList<Trail>();
+        final ArrayList<Trail> trailsArray = new ArrayList<Trail>();
         adapter = new TrailsListAdapter(this, trailsArray);
         this.populateAdapter(adapter);
         lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if( (trailsArray.get(position).establishments).length() > 0 ){
+                    Intent i = new Intent(TrailsActivity.this, EstablishmentsListActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString("establishments", (trailsArray.get(position).establishments).toString());
+                    i.putExtras(b);
+                    startActivity(i);
+                } else {
+                    Toast.makeText(TrailsActivity.this, "No establishments at this trail", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public void populateAdapter( TrailsListAdapter adapter ){
@@ -76,7 +87,9 @@ public class TrailsActivity extends AppCompatActivity {
                     String seasonName = seasonObj.getString("name");
                     trailSeasons.add(seasonName);
                 }
-                adapter.add( new Trail( trailName, trailRegion, trailCategories, trailSeasons ) );
+
+                JSONArray establishmentsArray = singleTrailNode.getJSONArray("field_trail_establishments_c");
+                adapter.add( new Trail( trailName, trailRegion, trailCategories, trailSeasons, establishmentsArray ) );
             }
         } catch ( ExecutionException e1 ){
             System.out.println( "ExecutionException" );
@@ -138,7 +151,7 @@ public class TrailsActivity extends AppCompatActivity {
 
                 JSONObject parameters = new JSONObject();
                 parameters.put( "token", token );
-                parameters.put( "limit", "5" );
+                parameters.put( "limit", "10" );
 
                 DataOutputStream wr = new DataOutputStream( connection.getOutputStream() );
 
@@ -163,4 +176,3 @@ public class TrailsActivity extends AppCompatActivity {
         }
     }
 }
-

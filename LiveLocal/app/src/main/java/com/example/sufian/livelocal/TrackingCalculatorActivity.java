@@ -1,6 +1,9 @@
 package com.example.sufian.livelocal;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -26,6 +29,7 @@ public class TrackingCalculatorActivity extends AppCompatActivity {
     private int amountSpent;
     private Button calcButton;
     private TextView backbtn;
+    private boolean cond = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +54,92 @@ public class TrackingCalculatorActivity extends AppCompatActivity {
         calcButton = (Button) findViewById(R.id.trackBtnCalc);
         calcButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                int amount = Integer.parseInt(amountEntered.getText().toString());
-                if((amount/10) == amountSpent){
-                    Toast.makeText(getApplicationContext(), "You have spent 10%", Toast.LENGTH_SHORT).show();
+                int amount = 0;
+                try {
+                    amount = Integer.parseInt(amountEntered.getText().toString());
+                    cond = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("NumberFormatException");
+                }
 
-                } else if((amount/10) < amountSpent){
-                    Toast.makeText(getApplicationContext(), "beyond the goal", Toast.LENGTH_SHORT).show();
+                if (cond == true) {
+                    //int amount = Integer.parseInt(amountEntered.getText().toString());
+                    if ((amount / 10) == amountSpent) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                        builder.setTitle("Congratulations!");
+                        builder.setMessage("You have spent 10% on local products this week!")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        //do things
+                                    }
+                                });
+                        final AlertDialog alert = builder.create();
+                        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+                            @Override
+                            public void onShow(DialogInterface arg0) {
+                                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE);
+                            }
+                        });
+                        alert.show();
 
-                } else if((amount/10) > amountSpent){
-                    Toast.makeText(getApplicationContext(), "Have not reached the goal", Toast.LENGTH_SHORT).show();
+                    } else if ((amount / 10) < amountSpent) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                        builder.setTitle("Congratulations");
+                        builder.setMessage("You have spent more than 10% on local products this week!")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        //do things
+                                    }
+                                });
+                        final AlertDialog alert = builder.create();
+                        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+                            @Override
+                            public void onShow(DialogInterface arg0) {
+                                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE);
+                            }
+                        });
+                        alert.show();
 
+                    } else if ((amount / 10) > amountSpent) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                        builder.setTitle("Buy local!");
+                        builder.setMessage("You need to spend $" + ((amount / 10) - amountSpent) + " more to reach your 10% goal! Keep up the good work!")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        //do things
+                                    }
+                                });
+                        final AlertDialog alert = builder.create();
+                        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+                            @Override
+                            public void onShow(DialogInterface arg0) {
+                                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE);
+                            }
+                        });
+                        alert.show();
+
+                    }
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                    builder.setTitle("Invalid Input");
+                    builder.setMessage("Please enter a valid number")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //do things
+                                }
+                            });
+                    final AlertDialog alert = builder.create();
+                    alert.setOnShowListener(new DialogInterface.OnShowListener() {
+                        @Override
+                        public void onShow(DialogInterface arg0) {
+                            alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE);
+                        }
+                    });
+                    alert.show();
                 }
             }
         });

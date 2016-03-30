@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,12 +63,13 @@ public class EventDetailActivity extends AppCompatActivity {
         //txtViewDetail.setText(time + "\n");
         txtViewDetail.append("\n");
         txtViewDetail.append(EventActivity.getEventAddr() + "\n");
+        txtViewDetail.append("______________________________________");
         txtViewDetail.append("\n");
-        txtViewDetail.append("________________________________________");
         txtViewDetail.append("\n");
-        txtViewDetail.append("\n");
-        txtViewDetail.append(Html.fromHtml(EventActivity.getEventDetail()) + "\n");
+        txtViewDetail.append(EventActivity.getEventDetail());
 
+        txtViewDetail.setMovementMethod(new ScrollingMovementMethod());
+        txtViewDetail.setMovementMethod(LinkMovementMethod.getInstance());
         backbtn = (TextView) findViewById(R.id.eventDetailBack);
         backbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

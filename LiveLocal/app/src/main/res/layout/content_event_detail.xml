@@ -48,10 +48,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textViewDetail"
+                        android:textColorLink="#e64a19"
                         android:textSize="16sp"
                         android:padding="8dp"
                         android:textStyle="bold"
                         android:textColor="#795548" />
+
 
             </ScrollView>
 

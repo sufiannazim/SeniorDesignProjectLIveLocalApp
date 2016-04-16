@@ -13,7 +13,11 @@
 
         <item android:title="Living Local in CT"
             android:id="@+id/nav_item_livingLocal"
-            android:icon="@drawable/ic_person"/>
+            android:icon="@drawable/ic_local_offer_black_48dp"/>
+
+        <item android:title="Other ways to live local"
+            android:id="@+id/nav_item_otherways"
+            android:icon="@drawable/ic_local_activity_black_48dp"/>
 
     <item android:title="About"
         android:id="@+id/nav_item_about"
@@ -38,15 +42,15 @@
 
         <item android:title="Grown Gift Guide"
             android:id="@+id/nav_item_giftGuide"
-            android:icon="@drawable/buying"/>
+            android:icon="@drawable/ic_local_grocery_store_black_48dp"/>
 
         <item android:title="Thanksgiving Turkey Guide"
             android:id="@+id/nav_item_turkeyGuide"
-            android:icon="@drawable/buying"/>
+            android:icon="@drawable/ic_local_grocery_store_black_48dp"/>
 
         <item android:title="Grown Valentine Guide"
             android:id="@+id/nav_item_valentineGuide"
-            android:icon="@drawable/buying"/>
+            android:icon="@drawable/ic_local_grocery_store_black_48dp"/>
     </menu>
 
     </item>
@@ -59,11 +63,11 @@
 
             <item android:title="Suggest a Listing"
                 android:id="@+id/nav_item_suggestListing"
-                android:icon="@drawable/buying"/>
+                android:icon="@drawable/ic_business_center_black_48dp"/>
 
             <item android:title="Business Registration"
                 android:id="@+id/nav_item_businessRegisteration"
-                android:icon="@drawable/buying"/>
+                android:icon="@drawable/ic_business_center_black_48dp"/>
         </menu>
 
     </item>

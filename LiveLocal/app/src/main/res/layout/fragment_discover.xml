@@ -3,33 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp"
-    android:background="#f2f9f2"
+    android:background="#FFFFFF"
     tools:context="com.example.sufian.livelocal.DiscoverFragment">
-
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#c6eec7">
+        android:scrollbars="none">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#c6eec7">
+            android:background="#FFFFFF"
+            android:isScrollContainer="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
+                android:background="#c6eec7"
                 android:id="@+id/linearLayout"
+                android:layout_marginBottom="5dp"
                 android:padding="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/textViewSeasonTopTenTitle"
                     android:textSize="22sp"
                     android:textStyle="bold"
@@ -37,32 +36,30 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:textSize="18dp"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
                     android:id="@+id/textViewSeasonTopTen"/>
 
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.75dip"
-                android:background="#8BC34A"
-                android:layout_alignBottom="@+id/linearLayout"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:background="#c6eec7"
                 android:id="@+id/linearLayout3"
                 android:layout_below="@+id/linearLayout2"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:padding="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/textViewTrailsTitle"
                     android:textSize="22sp"
                     android:textStyle="bold"
@@ -72,30 +69,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewTrails"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.75dip"
-                android:background="#8BC34A"
-                android:layout_alignBottom="@+id/linearLayout3"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:background="#c6eec7"
                 android:layout_below="@+id/linearLayout"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:id="@+id/linearLayout2"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:padding="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/textViewEventTitle"
                     android:textSize="22sp"
                     android:textStyle="bold"
@@ -103,32 +97,29 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/textViewEvent"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.75dip"
-                android:background="#8BC34A"
-                android:layout_alignBottom="@+id/linearLayout2"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:background="#c6eec7"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/linearLayout3"
                 android:id="@+id/linearLayout4"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:padding="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/textViewFishingTabbar"
                     android:textSize="22sp"
                     android:textStyle="bold"
@@ -136,25 +127,21 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.75dip"
-                android:background="#8BC34A"
-                android:layout_alignBottom="@+id/linearLayout4"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:background="#c6eec7"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/linearLayout4"
                 android:id="@+id/linearLayout5"
+                android:layout_marginTop="5dp"
                 android:padding="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/textViewHuntingTabbar"
                     android:textSize="22sp"
                     android:textStyle="bold"
@@ -162,13 +149,6 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.75dip"
-                android:background="#8BC34A"
-                android:layout_alignBottom="@+id/linearLayout5"/>
-
         </RelativeLayout>
     </ScrollView>
-
 </FrameLayout>

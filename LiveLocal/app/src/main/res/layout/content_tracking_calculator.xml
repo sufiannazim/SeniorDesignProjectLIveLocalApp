@@ -79,7 +79,7 @@
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/editTextCalcAmount"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Enter Amount"
                 android:inputType="number"

@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/establishmentName"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#e64a19"
+        android:typeface="serif"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -15,6 +21,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/establishmentStreet"
+        android:textSize="14sp"
+        android:textColor="#4e342e"
+        android:textStyle="bold"
         android:layout_below="@+id/establishmentName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -23,6 +32,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/establishmentCityState"
+        android:textSize="14sp"
+        android:textColor="#4e342e"
+        android:textStyle="bold"
         android:layout_below="@+id/establishmentStreet"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
@@ -31,6 +43,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/establishmentPhone"
+        android:textSize="14sp"
+        android:textColor="#4e342e"
+        android:textStyle="bold"
         android:layout_below="@+id/establishmentCityState"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -39,6 +54,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/establishmentSchedule"
+        android:textSize="14sp"
+        android:textColor="#4e342e"
+        android:textStyle="bold"
         android:layout_below="@+id/establishmentPhone"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

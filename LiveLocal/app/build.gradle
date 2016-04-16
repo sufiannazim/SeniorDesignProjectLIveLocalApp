@@ -40,4 +40,5 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:4.0.0'
     compile 'com.android.support:support-v4:23.2.1'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile 'com.synnapps:carouselview:0.0.9'
 }

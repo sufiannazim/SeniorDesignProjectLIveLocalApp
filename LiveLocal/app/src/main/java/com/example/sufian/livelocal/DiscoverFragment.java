@@ -64,16 +64,19 @@ public class DiscoverFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_discover, container, false);
 
         seasonTopTenTitle = (TextView) rootView.findViewById((R.id.textViewSeasonTopTenTitle));
+        seasonTopTenTitle.setOnClickListener(seasonTopTenButtonClickListener);
         seasonTopTen = (TextView) rootView.findViewById((R.id.textViewSeasonTopTen));
         seasonTopTen.setOnClickListener(seasonTopTenButtonClickListener);
 
         eventTitle = (TextView) rootView.findViewById((R.id.textViewEventTitle));
+        eventTitle.setOnClickListener(eventButtonClickListener);
         event = (TextView) rootView.findViewById((R.id.textViewEvent));
         event.setOnClickListener(eventButtonClickListener);
         eventTitle.setText(Html.fromHtml("<font color='#e64a19'>Events</font>"));
         event.setText(Html.fromHtml("<font color='#795548'>Upcoming Events</font>"));
 
         trailsTitle = (TextView) rootView.findViewById((R.id.textViewTrailsTitle));
+        trailsTitle.setOnClickListener(trailsButtonClickListener);
         trails = (TextView) rootView.findViewById((R.id.textViewTrails));
         trails.setOnClickListener(trailsButtonClickListener);
         trailsTitle.setText(Html.fromHtml("<font color='#e64a19'>Trails</font>"));

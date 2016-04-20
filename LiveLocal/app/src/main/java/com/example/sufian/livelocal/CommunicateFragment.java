@@ -79,24 +79,42 @@ public class CommunicateFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            
-            Intent intent = getActivity().getPackageManager().getLaunchIntentForPackage("com.instagram.android");
-            if (intent != null)
-            {
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.setPackage("com.instagram.android");
-                Uri tempUri = getImageUri(getActivity().getApplicationContext(), photo);
-                shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), photo, "image", "share")));
-                shareIntent.setType("image/jpeg");
-                getActivity().startActivity(shareIntent);
-            }
-            else
-            {
-                intent = new Intent(Intent.ACTION_VIEW);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setData(Uri.parse("market://details?id="+"com.instagram.android"));
-                startActivity(intent);
+
+            if (photo != null) {
+                Intent intent = getActivity().getPackageManager().getLaunchIntentForPackage("com.instagram.android");
+                if (intent != null) {
+                    Intent shareIntent = new Intent();
+                    shareIntent.setAction(Intent.ACTION_SEND);
+                    shareIntent.setPackage("com.instagram.android");
+                    Uri tempUri = getImageUri(getActivity().getApplicationContext(), photo);
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), photo, "image", "share")));
+                    shareIntent.setType("image/jpeg");
+                    getActivity().startActivity(shareIntent);
+                } else {
+                    intent = new Intent(Intent.ACTION_VIEW);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setData(Uri.parse("market://details?id=" + "com.instagram.android"));
+                    startActivity(intent);
+                }
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setTitle("Error");
+                builder.setMessage("Please choose or take the picture you want to share.")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //do things
+                            }
+                        });
+                final AlertDialog alert = builder.create();
+                alert.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface arg0) {
+                        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE);
+                    }
+                });
+                alert.show();
+
             }
         }
     };
@@ -115,7 +133,27 @@ public class CommunicateFragment extends Fragment {
         shareButton.setFragment(this);
         shareButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                postPicture();
+                if (photo != null) {
+                    postPicture();
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                    builder.setTitle("Error");
+                    builder.setMessage("Please choose or take the picture you want to share.")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //do things
+                                }
+                            });
+                    final AlertDialog alert = builder.create();
+                    alert.setOnShowListener(new DialogInterface.OnShowListener() {
+                        @Override
+                        public void onShow(DialogInterface arg0) {
+                            alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE);
+                        }
+                    });
+                    alert.show();
+                }
             }
         });
     }
@@ -198,35 +236,13 @@ public class CommunicateFragment extends Fragment {
     public void postPicture() {
         if(counter == 0) {
             image = photo;
-            AlertDialog.Builder shareDialog = new AlertDialog.Builder(getActivity());
-            shareDialog.setTitle("Share");
-            shareDialog.setMessage("Share image to Facebook?");
-            shareDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    SharePhoto photo = new SharePhoto.Builder()
-                            .setBitmap(image)
-                            .build();
-                    SharePhotoContent content = new SharePhotoContent.Builder().addPhoto(photo).build();
-                    shareButton.setShareContent(content);
-                    counter = 1;
-                    shareButton.performClick();
-                }
-            });
-            shareDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-
-            final AlertDialog alert = shareDialog.create();
-            alert.setOnShowListener(new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(DialogInterface arg0) {
-                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE);
-                    alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLUE);
-                }
-            });
-            alert.show();
+            SharePhoto photo = new SharePhoto.Builder()
+                    .setBitmap(image)
+                    .build();
+            SharePhotoContent content = new SharePhotoContent.Builder().addPhoto(photo).build();
+            shareButton.setShareContent(content);
+            counter = 1;
+            shareButton.performClick();
         }
         else {
             counter = 0;

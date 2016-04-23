@@ -32,7 +32,7 @@ public class SplashScreen extends Activity {
 
                 getDatafromAPI();
                 try{
-                    sleep(1000);
+                    sleep(0);
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{

@@ -20,6 +20,7 @@ public class EstablishmentsListActivity extends AppCompatActivity {
     private EstablishmentsListAdapter adapter;
     private ListView lv;
     private boolean flag = false;
+    private TextView removeView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,13 @@ public class EstablishmentsListActivity extends AppCompatActivity {
                     i.putExtras(b);
                     startActivity(i);
                 }
+            }
+        });
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        removeView = (TextView) findViewById(R.id.dismisstrailsList);
+        removeView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                finish();
             }
         });
     }

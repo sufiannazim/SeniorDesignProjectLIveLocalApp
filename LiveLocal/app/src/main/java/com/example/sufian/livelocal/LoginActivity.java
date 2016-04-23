@@ -110,10 +110,44 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Invalid Username/Password, please try again.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "Invalid Username/Password, please try again.", Toast.LENGTH_SHORT).show();
+                        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(v.getContext());
+                        builder.setTitle("Error");
+                        builder.setMessage("Invalid Username/Password, please try again!")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        //do things
+                                    }
+                                });
+                        final android.app.AlertDialog alert = builder.create();
+                        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+                            @Override
+                            public void onShow(DialogInterface arg0) {
+                                alert.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE);
+                            }
+                        });
+                        alert.show();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "Username/Password cannot be empty!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Username/Password cannot be empty!", Toast.LENGTH_SHORT).show();
+                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(v.getContext());
+                    builder.setTitle("Error");
+                    builder.setMessage("Invalid Username/Password, please try again!")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //do things
+                                }
+                            });
+                    final android.app.AlertDialog alert = builder.create();
+                    alert.setOnShowListener(new DialogInterface.OnShowListener() {
+                        @Override
+                        public void onShow(DialogInterface arg0) {
+                            alert.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE);
+                        }
+                    });
+                    alert.show();
                 }
             }
         });

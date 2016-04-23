@@ -19,6 +19,8 @@ import org.json.JSONObject;
 
 public class EstablishmentActivity extends AppCompatActivity {
 
+    private TextView removeView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +106,13 @@ public class EstablishmentActivity extends AppCompatActivity {
         } catch (JSONException e){
             e.printStackTrace();
         }
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        removeView = (TextView) findViewById(R.id.dismisstrailsDetail);
+        removeView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private String stripHTML( String html ){

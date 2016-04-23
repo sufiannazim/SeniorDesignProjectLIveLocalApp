@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -27,6 +28,8 @@ import java.util.concurrent.ExecutionException;
 
 public class TrailsActivity extends AppCompatActivity {
     private TrailsListAdapter adapter;
+    private TextView backbtn;
+    private TextView removeView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,13 @@ public class TrailsActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(TrailsActivity.this, "No establishments at this trail", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        removeView = (TextView) findViewById(R.id.dismisstrails);
+        removeView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                finish();
             }
         });
     }

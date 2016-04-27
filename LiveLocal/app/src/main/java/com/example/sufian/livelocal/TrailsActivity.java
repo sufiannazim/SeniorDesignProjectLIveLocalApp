@@ -70,7 +70,12 @@ public class TrailsActivity extends AppCompatActivity {
         try {
             HashMap hashMap = WebAPICommunication.getTrailsHashMap();
             Trail[] trailsArray = (Trail[]) hashMap.get("trails");
-            adapter.addAll(trailsArray);
+            for(int i=0; i < trailsArray.length(); i++){
+                Trail tElem = trailsArray[i];
+                if( tElem != null ){
+                    adapter.add( tElem );
+                }
+            }
         } catch ( Exception e1 ){
             System.out.println( "ExecutionException: " + e1 );
         }

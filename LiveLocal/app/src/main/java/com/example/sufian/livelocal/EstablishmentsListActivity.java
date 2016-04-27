@@ -68,9 +68,7 @@ public class EstablishmentsListActivity extends AppCompatActivity {
     public void populateAdapter( EstablishmentsListAdapter adapter, String jsonArrayString ){
         try {
             JSONArray establishments = new JSONArray(jsonArrayString);
-            if( establishments.length() > 0 ){
 
-            }
             for (int i=0; i< establishments.length(); i++){
                 JSONObject obj = establishments.getJSONObject(i);
                 if( obj.length() < 1 ){

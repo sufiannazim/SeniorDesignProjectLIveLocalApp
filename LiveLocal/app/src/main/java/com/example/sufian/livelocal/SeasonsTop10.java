@@ -41,7 +41,9 @@ public class SeasonsTop10 extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         TextView seasonTop10View = (TextView) findViewById(R.id.seasonsTop10View);
         HashMap hashMap = WebAPICommunication.getseasonTopTenHashMap();
-        seasonTop10View.setText(Html.fromHtml("<font color='#795548'>" + hashMap.get("seasonsTop10Body") + "</font>"));
+        String temp = hashMap.get("seasonsTop10Body").toString();
+        String onlyTenItems = temp.split("11")[0];
+        seasonTop10View.setText(Html.fromHtml("<font color='#795548'>" + onlyTenItems + "</font>"));
         seasonTop10View.setMovementMethod(new ScrollingMovementMethod());
         seasonTop10View.setMovementMethod(LinkMovementMethod.getInstance());
 

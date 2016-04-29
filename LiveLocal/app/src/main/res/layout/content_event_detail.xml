@@ -18,7 +18,6 @@
         android:paddingTop="5dp"
         android:background="#c6eec7"
         android:paddingBottom="15dp"
-
         >
 
         <TextView
@@ -59,7 +58,7 @@
                         android:id="@+id/textViewDetail"
                         android:textColorLink="#e64a19"
                         android:autoLink="web"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
                         android:paddingTop="8dp"

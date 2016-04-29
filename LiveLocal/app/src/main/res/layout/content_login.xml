@@ -33,13 +33,14 @@
             android:id="@+id/editTextUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username or Email"
+            android:hint="Username"
             android:textCursorDrawable="@color/colorPrimaryDark"
             app:met_baseColor="@color/colorPrimaryDark"
             app:met_primaryColor="#000000"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:met_floatingLabel="highlight"
-            android:inputType="textEmailAddress|textPersonName"/>
+            android:inputType="textPersonName"/>
 
         <!-- Password Label
         app:met_maxCharacters="20"
@@ -49,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
+            android:textStyle="bold"
             android:textCursorDrawable="@color/colorPrimaryDark"
             app:met_baseColor="@color/colorPrimaryDark"
             app:met_primaryColor="#000000"

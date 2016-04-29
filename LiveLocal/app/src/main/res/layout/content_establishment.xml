@@ -5,39 +5,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp"
-    android:background="#f2f9f2"
+    android:background="#FFFFFF"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.sufian.livelocal.EstablishmentActivity"
     tools:showIn="@layout/activity_establishment">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#c6eec7">
+        android:orientation="vertical"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="5dp"
+        android:background="#c6eec7"
+        android:paddingBottom="15dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Profile: "
+            android:id="@+id/locationName"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingBottom="5dp"
+            android:textColor="#e64a19"
+            android:typeface="serif" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="2dp"
+        android:background="#FFFFFF"
+        android:isScrollContainer="true"
+        android:orientation="vertical"
+        android:scrollbarAlwaysDrawVerticalTrack="true">
 
         <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:fillViewport="true">
+
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="#f2f9f2">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Profile: "
-                    android:id="@+id/locationName"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:autoText="false" />
+                android:background="#FFFFFF">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/locationDesc"
-                    android:layout_below="@+id/locationName" />
+                    android:textColor="#795548"
+                     />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -47,7 +66,9 @@
                     android:id="@+id/moreInfoHeader"
                     android:layout_below="@+id/locationDesc"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"  />
+                    android:layout_alignParentStart="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -55,7 +76,8 @@
                     android:text="Contact Info"
                     android:id="@+id/contactInfoSubHeader"
                     android:layout_below="@+id/moreInfoHeader"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -63,6 +85,7 @@
                     android:text="Phone: "
                     android:autoLink="phone"
                     android:id="@+id/locationPhone"
+                    android:textColor="#795548"
                     android:layout_below="@id/contactInfoSubHeader"/>
 
                 <TextView
@@ -71,6 +94,7 @@
                     android:text="Website: "
                     android:autoLink="web"
                     android:id="@+id/locationWebsite"
+                    android:textColor="#795548"
                     android:layout_below="@+id/locationPhone" />
 
                 <TextView
@@ -80,37 +104,43 @@
                     android:text="Our Locations"
                     android:id="@+id/locationInfoSubHeader"
                     android:layout_below="@+id/locationWebsite"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/locationInfoName"
                     android:layout_below="@id/locationInfoSubHeader"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="#795548"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/locationInfoStreet"
+                    android:textColor="#795548"
                     android:layout_below="@id/locationInfoName"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/locationInfoCityStateZip"
+                    android:textColor="#795548"
                     android:layout_below="@id/locationInfoStreet"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/locationInfoDates"
+                    android:textColor="#795548"
                     android:layout_below="@id/locationInfoCityStateZip"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/locationInfoHours"
+                    android:textColor="#795548"
                     android:layout_below="@id/locationInfoDates"/>
 
                 <TextView
@@ -121,14 +151,17 @@
                     android:id="@+id/productsInfoHeader"
                     android:layout_below="@+id/locationInfoDates"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"  />
+                    android:layout_alignParentStart="true"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/locationProducts"
+                    android:textColor="#795548"
                     android:layout_below="@id/productsInfoHeader"/>
             </RelativeLayout>
         </ScrollView>
-    </RelativeLayout>
+    </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

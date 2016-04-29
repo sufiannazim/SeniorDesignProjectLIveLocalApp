@@ -39,6 +39,7 @@ public class EstablishmentsListActivity extends AppCompatActivity {
         lv.setAdapter(adapter);
 
         TextView flagText = (TextView) findViewById(R.id.noEstabFlag);
+        flag = true;
         if( flag == false ){
             flagText.setText( "No trails available" );
         } else {
@@ -47,13 +48,15 @@ public class EstablishmentsListActivity extends AppCompatActivity {
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if( (establishmentsArray.get(position).meta).length() > 0 ){
-                    Intent i = new Intent(EstablishmentsListActivity.this, EstablishmentActivity.class);
-                    Bundle b = new Bundle();
-                    b.putString("establishment", (establishmentsArray.get(position).meta).toString());
-                    i.putExtras(b);
-                    startActivity(i);
-                }
+            if( (establishmentsArray.get(position).meta).length() > 0 ){
+                Intent i = new Intent(EstablishmentsListActivity.this, EstablishmentActivity.class);
+                Bundle b = new Bundle();
+                b.putString("establishment", (establishmentsArray.get(position).meta).toString());
+                i.putExtras(b);
+                startActivity(i);
+            } else {
+                Toast.makeText(EstablishmentsListActivity.this, "No detailed information for this establishment", Toast.LENGTH_LONG).show();
+            }
             }
         });
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -69,27 +72,32 @@ public class EstablishmentsListActivity extends AppCompatActivity {
         try {
             JSONArray establishments = new JSONArray(jsonArrayString);
 
-            for (int i=0; i< establishments.length(); i++){
+            for (int i=0; i < establishments.length(); i++){
                 JSONObject obj = establishments.getJSONObject(i);
-                if( obj.length() < 1 ){
-                    flag = true;
-                    continue;
-                }
+
                 JSONObject establishmentMeta = obj.getJSONObject("field_trail_col_establishment");
-                String name = establishmentMeta.getString("name");
-                if( !(establishmentMeta.isNull("name")) ){
-                    flag = true;
+                if( establishmentMeta.length() > 0 ){
+                    String name = establishmentMeta.getString("name");
+
+                    JSONArray esLocationsArr = establishmentMeta.getJSONArray("field_establishment_locations");
+                    JSONObject esLocation = esLocationsArr.getJSONObject(0);
+                    JSONObject esLocationZip = esLocation.getJSONObject("field_location_zip");
+
+                    String street = esLocation.getString("field_location_street");
+                    String cityState = esLocation.getString("field_location_city") + " " + esLocationZip.getString("field_zip_state") + " " + esLocationZip.getString("name");
+                    String phone = establishmentMeta.getString("field_establishment_phone");
+
+                    String schedule = emptyIfNull(obj.getString("field_trail_hours"));
+                    adapter.add(new Establishment(name, street, cityState, phone, schedule, establishmentMeta));
+                } else {
+                    String name = obj.getString("field_tail_collection_lname");
+                    String street = obj.getString("field_trail_collection_street");
+                    String cityState = obj.getString("field_trail_collection_city") +  " , CT";
+                    String phone = obj.getString("field_trail_collection_phone");
+                    String schedule = emptyIfNull(obj.getString("field_trail_hours"));
+
+                    adapter.add(new Establishment(name, street, cityState, phone, schedule, null));
                 }
-                JSONArray esLocationsArr = establishmentMeta.getJSONArray("field_establishment_locations");
-                JSONObject esLocation = esLocationsArr.getJSONObject(0);
-                JSONObject esLocationZip = esLocation.getJSONObject("field_location_zip");
-
-                String street = esLocation.getString("field_location_street");
-                String cityState = esLocation.getString("field_location_city") + " " + esLocationZip.getString("field_zip_state") + " " + esLocationZip.getString("name");
-                String phone = establishmentMeta.getString("field_establishment_phone");
-
-                String schedule = emptyIfNull(obj.getString("field_trail_hours"));
-                adapter.add(new Establishment(name, street, cityState, phone, schedule, establishmentMeta));
             }
         } catch ( JSONException e) {
             e.printStackTrace();

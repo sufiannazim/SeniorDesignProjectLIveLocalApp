@@ -3,6 +3,7 @@ package com.example.sufian.livelocal;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -46,15 +47,16 @@ public class TrailsActivity extends AppCompatActivity {
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if( (trailsArray.get(position).establishments).length() > 0 ){
-                    Intent i = new Intent(TrailsActivity.this, EstablishmentsListActivity.class);
-                    Bundle b = new Bundle();
-                    b.putString("establishments", (trailsArray.get(position).establishments).toString());
-                    i.putExtras(b);
-                    startActivity(i);
-                } else {
-                    Toast.makeText(TrailsActivity.this, "No establishments at this trail", Toast.LENGTH_SHORT).show();
-                }
+            if( (trailsArray.get(position)).establishments.length() > 0 ){
+                System.out.println((trailsArray.get(position)).establishments.length());
+                Intent i = new Intent(TrailsActivity.this, EstablishmentsListActivity.class);
+                Bundle b = new Bundle();
+                b.putString("establishments", (trailsArray.get(position).establishments).toString());
+                i.putExtras(b);
+                startActivity(i);
+            } else {
+                Toast.makeText(TrailsActivity.this, "No establishments at this trail", Toast.LENGTH_SHORT).show();
+            }
             }
         });
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -70,7 +72,7 @@ public class TrailsActivity extends AppCompatActivity {
         try {
             HashMap hashMap = WebAPICommunication.getTrailsHashMap();
             Trail[] trailsArray = (Trail[]) hashMap.get("trails");
-            for(int i=0; i < trailsArray.length(); i++){
+            for(int i=0; i < trailsArray.length; i++){
                 Trail tElem = trailsArray[i];
                 if( tElem != null ){
                     adapter.add( tElem );

@@ -247,10 +247,12 @@ public class WebAPICommunication {
                 String trailName = singleTrailNode.getString("name");
 
                 JSONArray establishmentsArray = singleTrailNode.getJSONArray("field_trail_establishments_c");
-                if( trailName == null || trailName.isEmpty() || establishmentsArray.length() < 1 ){
+
+                if( establishmentsArray.length() < 1 ){
                     filteredTrails[i] = null;
                     continue;
                 }
+
                 JSONArray trailRegionArray = singleTrailNode.getJSONArray("field_trail_region_town_h");
                 JSONObject trailRegionObj = trailRegionArray.getJSONObject(0);
                 String trailRegion = trailRegionObj.getString("name");

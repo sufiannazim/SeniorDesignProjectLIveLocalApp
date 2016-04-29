@@ -48,7 +48,7 @@ public class EstablishmentsListActivity extends AppCompatActivity {
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            if( (establishmentsArray.get(position).meta).length() > 0 ){
+            if( (establishmentsArray.get(position)).meta != null && (establishmentsArray.get(position)).meta.length() > 0 ){
                 Intent i = new Intent(EstablishmentsListActivity.this, EstablishmentActivity.class);
                 Bundle b = new Bundle();
                 b.putString("establishment", (establishmentsArray.get(position).meta).toString());
